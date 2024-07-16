@@ -1,3 +1,5 @@
+<?php $title = "NHS BSA Database 2024" ?>
+
 <?php require "templates/header.php"; ?>
 
 <?php

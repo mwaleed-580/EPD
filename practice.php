@@ -1,7 +1,6 @@
-<?php require "templates/header.php"; ?>
+<?php require "auth/config.php"; ?>
 
 <?php
-
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $practice_code = $_GET['practice-code'];
 
@@ -10,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
-        $practice_name = $row['PRACTICE_NAME'];
+        $title = $row['PRACTICE_NAME'];
     } else {
         die;
     }
@@ -22,8 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 }
 ?>
 
+<?php require "templates/header.php"; ?>
+
 <div class="main-wrapper">
-    <h1 class="my-4"><?php echo $practice_name; ?></h1>
+    <h1 class="my-4"><?php echo $title; ?></h1>
     <p> <strong>Total Items:</strong> <span id="total-items"><?php echo $total_items; ?></span> </p>
 
     <table class="table my-4" id="resultsTable">
