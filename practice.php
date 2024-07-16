@@ -37,11 +37,21 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         <tbody></tbody>
     </table>
 
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center" id="pagination">
+        </ul>
+    </nav>
+
 </div>
 
 <script>
     const practiceCode = <?php echo json_encode($practice_code); ?>;
+    var last_BNF_Description = null;
+    var currentPage = 1;
+    var totalPages;
+    var create_pagination = false;
 </script>
-<script src="assets/js/practice-name.js"></script>
+<script src="assets/js/practice_name/get-resuts.js"></script>
+<script src="assets/js/practice_name/pagination.js"></script>
 
 <?php require "templates/footer.php"; ?>

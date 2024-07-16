@@ -6,3 +6,8 @@
 a {
   text-decoration: none;
 }
+
+#resultsTable thead tr th:first-child,
+#resultsTable thead tr th:last-child {
+  width: 100px;
+}

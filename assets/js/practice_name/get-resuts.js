@@ -1,6 +1,6 @@
-document.addEventListener("DOMContentLoaded", function () {
+function getResults(page) {
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", "includes/get_practice_data.php", true);
+  xhr.open("POST", "includes/practice_name/get_practice_data.php", true);
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xhr.onload = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
@@ -10,6 +10,12 @@ document.addEventListener("DOMContentLoaded", function () {
         .getElementById("resultsTable")
         .getElementsByTagName("tbody")[0];
       tableBody.innerHTML = "";
+      currentPage = page;
+
+      if (create_pagination) {
+        createPagination();
+      }
+      create_pagination = true;
 
       if (response.result_obj.length === 0) {
         var row = tableBody.insertRow();
@@ -34,5 +40,12 @@ document.addEventListener("DOMContentLoaded", function () {
   xhr.onerror = function () {
     console.error("AJAX Error");
   };
-  xhr.send("practiceCode=" + encodeURIComponent(practiceCode));
-});
+  xhr.send(
+    "practiceCode=" +
+      encodeURIComponent(practiceCode) +
+      "&page=" +
+      encodeURIComponent(page)
+  );
+}
+
+document.addEventListener("DOMContentLoaded", getResults(1));
