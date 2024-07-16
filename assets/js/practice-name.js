@@ -13,15 +13,17 @@ document.addEventListener("DOMContentLoaded", function () {
       if (response.result_obj.length === 0) {
         var row = tableBody.insertRow();
         var cell = row.insertCell(0);
-        cell.colSpan = 2;
+        cell.colSpan = 3;
         cell.textContent = "No results found";
       } else {
-        response.result_obj.forEach(function (item) {
+        response.result_obj.forEach(function (item, index) {
           var row = tableBody.insertRow();
           var cell1 = row.insertCell(0);
           var cell2 = row.insertCell(1);
-          cell1.textContent = item.BNF_DESCRIPTION;
-          cell2.textContent = item.TOTAL_ITEMS;
+          var cell3 = row.insertCell(2);
+          cell1.textContent = index + 1;
+          cell2.textContent = item.BNF_DESCRIPTION;
+          cell3.textContent = item.TOTAL_ITEMS;
         });
       }
     } else {
