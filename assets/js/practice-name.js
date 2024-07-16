@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   xhr.onload = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
       var response = JSON.parse(xhr.responseText);
+      console.log(response);
       var tableBody = document
         .getElementById("resultsTable")
         .getElementsByTagName("tbody")[0];
