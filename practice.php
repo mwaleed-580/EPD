@@ -27,6 +27,28 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     <h1 class="my-4"><?php echo $title; ?></h1>
     <p> <strong>Total Items:</strong> <span id="total-items"><?php echo $total_items; ?></span> </p>
 
+    <div id="filter-rows" class="mt-3">
+        <div class="row g-3 filter-row my-1">
+            <div class="col-md-4">
+                <select class="form-control" id="order-by">
+                    <option disabled selected>Order By</option>
+                    <option value="TOTAL_ITEMS">Items</option>
+                    <option value="BNF_DESCRIPTION">BNF Description</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <select class="form-control" id="order">
+                    <option disabled selected value="null">Order</option>
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-success" id="sort" disabled>Sort Results</button>
+            </div>
+        </div>
+    </div>
+
     <table class="table my-4" id="resultsTable">
         <thead>
             <tr>
@@ -51,8 +73,11 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     var currentPage = 1;
     var totalPages;
     var create_pagination = false;
+    var orderByValue;
+    var orderValue;
 </script>
 <script src="assets/js/practice_name/get-resuts.js"></script>
 <script src="assets/js/practice_name/pagination.js"></script>
+<script src="assets/js/practice_name/sort-items.js"></script>
 
 <?php require "templates/footer.php"; ?>

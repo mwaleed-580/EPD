@@ -7,7 +7,7 @@ function createPageItem(
   const li = document.createElement("li");
   li.className =
     "page-item" + (isActive ? " active" : "") + (isDisabled ? " disabled" : "");
-  li.innerHTML = `<a class="page-link" href="#" onclick="getResults(${page})">${
+  li.innerHTML = `<a class="page-link" href="#" onclick="getResults(${page},'${orderByValue}','${orderValue}')">${
     text || page
   }</a>`;
   return li;
@@ -63,7 +63,6 @@ document.addEventListener("DOMContentLoaded", function () {
   xhr.onload = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
       var response = JSON.parse(xhr.responseText);
-      console.log(response);
       totalPages = response.total_pages;
       createPagination();
     } else {

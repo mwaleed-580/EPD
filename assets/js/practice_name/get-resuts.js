@@ -1,11 +1,10 @@
-function getResults(page) {
+function getResults(page, orderBy = null, order = null) {
   var xhr = new XMLHttpRequest();
   xhr.open("POST", "includes/practice_name/get_practice_data.php", true);
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xhr.onload = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
       var response = JSON.parse(xhr.responseText);
-      console.log(response);
       var tableBody = document
         .getElementById("resultsTable")
         .getElementsByTagName("tbody")[0];
@@ -23,14 +22,21 @@ function getResults(page) {
         cell.colSpan = 3;
         cell.textContent = "No results found";
       } else {
-        response.result_obj.forEach(function (item, index) {
+        let srNo = currentPage;
+        if (currentPage > 1) {
+          srNo = (currentPage - 1) * 100 + 1;
+        }
+
+        response.result_obj.forEach(function (item) {
           var row = tableBody.insertRow();
           var cell1 = row.insertCell(0);
           var cell2 = row.insertCell(1);
           var cell3 = row.insertCell(2);
-          cell1.textContent = index + 1;
+
+          cell1.textContent = srNo;
           cell2.textContent = item.BNF_DESCRIPTION;
           cell3.textContent = item.TOTAL_ITEMS;
+          srNo++;
         });
       }
     } else {
@@ -44,7 +50,11 @@ function getResults(page) {
     "practiceCode=" +
       encodeURIComponent(practiceCode) +
       "&page=" +
-      encodeURIComponent(page)
+      encodeURIComponent(page) +
+      "&orderBy=" +
+      encodeURIComponent(orderBy) +
+      "&order=" +
+      encodeURIComponent(order)
   );
 }
 
