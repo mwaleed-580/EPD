@@ -8,13 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   orderBy.addEventListener("change", () => {
     orderByValue = orderBy.value;
-    if (orderByValue === "BNF_DESCRIPTION") {
-      order.disabled = true;
-      orderValue = null;
-    } else {
-      order.disabled = false;
-      orderValue = order.value;
-    }
 
     if (orderByValue !== "null" && orderValue !== "null") {
       sortBtn.disabled = false;
@@ -24,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   order.addEventListener("change", () => {
+    orderValue = order.value;
     if (orderByValue !== "null" && orderValue !== "null") {
       sortBtn.disabled = false;
     } else {
