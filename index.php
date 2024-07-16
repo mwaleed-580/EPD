@@ -65,7 +65,7 @@ $nextLastId = 0;
 ?>
 
 <div class="main-wrapper">
-    <h1 class="my-4">NHS BSA Database March 2024</h1>
+    <h1 class="my-4">NHS BSA Database 2024</h1>
 
     <form method="GET" action="<?php $_SERVER['PHP_SELF'] ?>" class="mb-4">
         <div class="row g-12 align-items-end">
