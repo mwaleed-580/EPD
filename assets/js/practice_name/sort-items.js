@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   order.addEventListener("change", () => {
-    orderValue = order.value;
     if (orderByValue !== "null" && orderValue !== "null") {
       sortBtn.disabled = false;
     } else {
