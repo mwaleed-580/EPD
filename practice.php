@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         <div class="row g-3 filter-row my-1">
             <div class="col-md-4">
                 <select class="form-control" id="order-by">
-                    <option disabled selected>Order By</option>
+                    <option disabled selected value="null">Order By</option>
                     <option value="TOTAL_ITEMS">Items</option>
                     <option value="BNF_DESCRIPTION">BNF Description</option>
                 </select>
