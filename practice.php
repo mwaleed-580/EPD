@@ -14,10 +14,11 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         die;
     }
 
-    $query = "SELECT SUM(ITEMS) AS TOTAL_ITEMS FROM temp_epd WHERE PRACTICE_CODE = '" . $practice_code . "'";
+    $query = "SELECT SUM(ITEMS) AS TOTAL_ITEMS, SUM(ACTUAL_COST) AS TOTAL_COST FROM temp_epd WHERE PRACTICE_CODE = '" . $practice_code . "'";
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_assoc($result);
     $total_items = $row['TOTAL_ITEMS'];
+    $total_cost = $row['TOTAL_COST'];
 }
 ?>
 
@@ -25,7 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
 <div class="main-wrapper">
     <h1 class="my-4"><?php echo $title; ?></h1>
-    <p> <strong>Total Items:</strong> <span id="total-items"><?php echo $total_items; ?></span> </p>
+    <p> <strong>Total Overall Items:</strong> <span id="total-items"><?php echo number_format($total_items, 0, '.', ','); ?></span> </p>
+    <p> <strong>Total Overall Cost:</strong> <span id="total-items"><?php echo number_format($total_cost, 2, '.', ','); ?></span> </p>
 
     <div id="filter-rows" class="mt-3">
         <div class="row g-3 filter-row my-1">

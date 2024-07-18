@@ -37,7 +37,14 @@ function getResults(page, orderBy = null, order = null) {
           cell1.textContent = srNo;
           cell2.textContent = item.BNF_DESCRIPTION;
           cell3.textContent = item.TOTAL_ITEMS;
-          cell4.textContent = item.TOTAL_COST;
+
+          var totalCost = item.TOTAL_COST;
+          totalCost = parseFloat(totalCost);
+          let formattedTotalCost = totalCost.toLocaleString("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          });
+          cell4.textContent = formattedTotalCost;
           srNo++;
         });
       }
