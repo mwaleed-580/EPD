@@ -55,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 <th scope="col">Sr no.</th>
                 <th scope="col">BNF Description</th>
                 <th scope="col">Total Items</th>
+                <th scope="col">Total Cost</th>
             </tr>
         </thead>
         <tbody></tbody>

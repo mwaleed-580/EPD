@@ -219,15 +219,15 @@ $nextLastId = 0;
 <script src="assets/js/get-totals.js"></script>
 <script src="assets/js/filters.js"></script>
 
-<?php
-$boundQuery = $query;
-foreach ($bindings as $value) {
-    $value = is_string($value) ? "'$value'" : $value;
-    $boundQuery = preg_replace('/\?/', $value, $boundQuery, 1);
-}
+<!-- <?php
+        $boundQuery = $query;
+        foreach ($bindings as $value) {
+            $value = is_string($value) ? "'$value'" : $value;
+            $boundQuery = preg_replace('/\?/', $value, $boundQuery, 1);
+        }
 
-echo $boundQuery;
+        echo $boundQuery;
 
-?>
+        ?> -->
 
 <?php require "templates/footer.php"; ?>
