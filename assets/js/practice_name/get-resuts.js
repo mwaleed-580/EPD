@@ -44,7 +44,7 @@ function getResults(page, orderBy = null, order = null) {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           });
-          cell4.textContent = formattedTotalCost;
+          cell4.textContent = "£" + formattedTotalCost;
           srNo++;
         });
       }
