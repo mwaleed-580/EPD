@@ -7,7 +7,10 @@ a {
   text-decoration: none;
 }
 
-#resultsTable thead tr th:first-child,
-#resultsTable thead tr th:last-child {
+table th.width-100 {
   width: 100px;
+}
+
+table th.width-150 {
+  width: 150px;
 }

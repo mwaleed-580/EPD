@@ -5,7 +5,7 @@ $practice_code = $_POST['practiceCode'];
 
 $start_time = microtime(true);
 
-$query = "SELECT COUNT(*) AS total_results FROM (SELECT BNF_DESCRIPTION, SUM(ITEMS) AS TOTAL_ITEMS FROM temp_epd WHERE PRACTICE_CODE = '" . $practice_code . "' GROUP BY BNF_DESCRIPTION ORDER BY BNF_DESCRIPTION) AS subquery";
+$query = "SELECT COUNT(*) AS total_results FROM (SELECT BNF_DESCRIPTION, SUM(ITEMS) AS TOTAL_ITEMS FROM EPD__202403 WHERE PRACTICE_CODE = '" . $practice_code . "' GROUP BY BNF_DESCRIPTION ORDER BY BNF_DESCRIPTION) AS subquery";
 
 $result = mysqli_query($conn, $query);
 $row_total = mysqli_fetch_assoc($result);

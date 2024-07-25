@@ -14,7 +14,7 @@ if ($current_page > 1) {
 
 $start_time = microtime(true);
 
-$query = "SELECT BNF_DESCRIPTION, SUM(ITEMS) AS TOTAL_ITEMS, SUM(ACTUAL_COST) AS TOTAL_COST FROM EPD__202403 WHERE PRACTICE_CODE = '" . $practice_code . "' GROUP BY BNF_DESCRIPTION";
+$query = "SELECT DispenserName, SUM(NumberofItems) AS TOTAL_ITEMS, SUM(NumberofEPSItems) AS TOTAL_EPS_ITEMS FROM DispensarData WHERE PracticeCode = '" . $practice_code . "' GROUP BY DispenserName";
 
 if ($orderBy !== 'null') {
     $query .= " ORDER BY " . $orderBy . "";

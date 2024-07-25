@@ -6,7 +6,7 @@ function getResults(page, orderBy = null, order = null) {
     if (xhr.readyState === 4 && xhr.status === 200) {
       var response = JSON.parse(xhr.responseText);
       var tableBody = document
-        .getElementById("resultsTable")
+        .getElementById("practiceDataTable")
         .getElementsByTagName("tbody")[0];
       tableBody.innerHTML = "";
       currentPage = page;

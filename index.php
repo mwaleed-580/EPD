@@ -7,7 +7,7 @@
 $itemsPerPage = 100;
 $lastId = isset($_GET['page']) ? intval($_GET['page']) : 0;
 
-$query = "SELECT * FROM temp_epd";
+$query = "SELECT * FROM EPD__202403";
 $whereClauses = [];
 $bindings = [];
 $types = '';

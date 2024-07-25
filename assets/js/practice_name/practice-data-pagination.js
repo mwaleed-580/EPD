@@ -58,7 +58,7 @@ function createPagination() {
 
 document.addEventListener("DOMContentLoaded", function () {
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", "includes/practice_name/get_total_rows.php", true);
+  xhr.open("POST", "includes/practice_name/get_total_practice_rows.php", true);
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xhr.onload = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {

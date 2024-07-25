@@ -12,7 +12,7 @@ $execution_time = 0;
 
 $start_time = microtime(true);
 
-$countQuery = "SELECT COUNT(*) AS total_count, SUM(ACTUAL_COST) AS total_cost, SUM(ITEMS) AS total_items FROM temp_epd";
+$countQuery = "SELECT COUNT(*) AS total_count, SUM(ACTUAL_COST) AS total_cost, SUM(ITEMS) AS total_items FROM EPD__202403";
 
 if (!empty($countWhereClauses)) {
     $whereConditions = [];
