@@ -14,3 +14,39 @@ table th.width-100 {
 table th.width-150 {
   width: 150px;
 }
+
+thead tr {
+  text-wrap: nowrap;
+}
+
+.tablesorter-header {
+  position: relative;
+  text-wrap: nowrap;
+  padding-right: 20px !important;
+  cursor: pointer;
+}
+
+.tablesorter-header::before,
+.tablesorter-header::after {
+  position: absolute;
+  right: 0;
+  font-family: "FontAwesome";
+  opacity: 0.3;
+  color: #c7c7c7;
+}
+
+.tablesorter-header::before {
+  content: "\f0de";
+  top: calc(50% - 0.75em);
+}
+
+.tablesorter-header::after {
+  content: "\f0dd";
+  bottom: calc(50% - 0.75em);
+}
+
+.tablesorter-header.headerAsc::before,
+.tablesorter-header.headerDesc::after {
+  opacity: 1;
+  color: #000;
+}

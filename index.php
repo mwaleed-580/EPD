@@ -54,7 +54,18 @@ if (!empty($whereClauses)) {
     $query .= ' WHERE ' . implode(' AND ', $whereClauses);
 }
 
-$query .= " ORDER BY id ASC LIMIT ?";
+$orderBy = null;
+$order = null;
+
+if (isset($_GET['orderby']) && isset($_GET['order']) && $_GET['orderby']) {
+    $orderBy = mysqli_real_escape_string($conn, $_GET['orderby']);
+    $order = mysqli_real_escape_string($conn, $_GET['order']);
+    $query .= " ORDER BY $orderBy $order";
+} else {
+    $query .= " ORDER BY id ASC";
+}
+
+$query .= " LIMIT ?";
 $bindings[] = $itemsPerPage;
 $types .= 'i';
 
@@ -64,6 +75,15 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
 $nextLastId = 0;
+
+function getHeaderClass($dataCols, $orderBy, $order)
+{
+    if ($dataCols === $orderBy) {
+        return $order === 'ASC' ? 'headerAsc' : 'headerDesc';
+    }
+    return '';
+}
+
 ?>
 
 <div class="main-wrapper">
@@ -142,28 +162,28 @@ $nextLastId = 0;
             }
             ?>
         </div>
-        <div class="row mt-3">
+        <div class="row py-3">
             <div class="col-md-3">
                 <div class="d-flex gap-3">
                     <button type="submit" class="btn btn-primary">Apply Filters</button>
-                    <a href="<?php $_SERVER['PHP_SELF'] ?>" class="btn btn-danger">Reset Filters</a>
+                    <a href="/php-projects/EPD/" class="btn btn-danger">Reset Filters</a>
                 </div>
             </div>
         </div>
     </form>
 
-    <table class="table my-4">
+    <table class="table table-hover my-4">
         <thead>
             <tr>
                 <th scope="col">Sr no</th>
-                <th scope="col">Bnf code</th>
-                <th scope="col">Practice Name</th>
-                <th scope="col">Name</th>
-                <th scope="col">Items</th>
-                <th scope="col">NIC</th>
-                <th scope="col">Actual cost</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Total Quantity</th>
+                <th class="tablesorter-header <?php echo getHeaderClass('BNF_CODE', $orderBy, $order); ?>" scope="col" data-cols="BNF_CODE">Bnf code</th>
+                <th class="tablesorter-header <?php echo getHeaderClass('PRACTICE_NAME', $orderBy, $order); ?>" scope="col" data-cols="PRACTICE_NAME">Practice Name</th>
+                <th class="tablesorter-header <?php echo getHeaderClass('BNF_CHAPTER_PLUS_CODE', $orderBy, $order); ?>" scope="col" data-cols="BNF_CHAPTER_PLUS_CODE">Name</th>
+                <th class="tablesorter-header <?php echo getHeaderClass('ITEMS', $orderBy, $order); ?>" scope="col" data-cols="ITEMS">Items</th>
+                <th class="tablesorter-header <?php echo getHeaderClass('NIC', $orderBy, $order); ?>" scope="col" data-cols="NIC">NIC</th>
+                <th class="tablesorter-header <?php echo getHeaderClass('ACTUAL_COST', $orderBy, $order); ?>" scope="col" data-cols="ACTUAL_COST">Actual cost</th>
+                <th class="tablesorter-header <?php echo getHeaderClass('QUANTITY', $orderBy, $order); ?>" scope="col" data-cols="QUANTITY">Quantity</th>
+                <th class="tablesorter-header <?php echo getHeaderClass('TOTAL_QUANTITY', $orderBy, $order); ?>" scope="col" data-cols="TOTAL_QUANTITY">Total Quantity</th>
             </tr>
         </thead>
         <tbody>
@@ -218,6 +238,7 @@ $nextLastId = 0;
 </script>
 <script src="assets/js/get-totals.js"></script>
 <script src="assets/js/filters.js"></script>
+<script src="assets/js/sorting.js"></script>
 
 <!-- <?php
         $boundQuery = $query;
