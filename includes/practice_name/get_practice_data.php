@@ -12,8 +12,6 @@ if ($current_page > 1) {
     $offset = $current_page - 1;
 }
 
-$start_time = microtime(true);
-
 $query = "SELECT BNF_DESCRIPTION, SUM(ITEMS) AS TOTAL_ITEMS, SUM(ACTUAL_COST) AS TOTAL_COST FROM EPD__202403 WHERE PRACTICE_CODE = '" . $practice_code . "' GROUP BY BNF_DESCRIPTION";
 
 if ($orderBy !== 'null') {
@@ -34,12 +32,8 @@ while ($row = mysqli_fetch_assoc($result)) {
     $rows[] = $row;
 }
 
-$end_time = microtime(true);
-$execution_time = round(($end_time - $start_time) * 1000, 2);
-
 $response = [
     'result_obj' => $rows,
-    'execution_time' => $execution_time
 ];
 
 header('Content-Type: application/json');

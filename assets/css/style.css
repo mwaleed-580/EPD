@@ -48,5 +48,32 @@ thead tr {
 .tablesorter-header.headerAsc::before,
 .tablesorter-header.headerDesc::after {
   opacity: 1;
-  color: #000;
+  color: #010080;
+}
+
+.bg-primary {
+  background-color: #010080 !important;
+  border: 1px solid #010080 !important;
+}
+
+.bg-secondary {
+  background-color: #0000fe !important;
+  border: 1px solid #0000fe !important;
+  color: #fff !important;
+}
+
+.color-primary {
+  color: #010080 !important;
+}
+
+.border-primary {
+  border: 1px solid #010080 !important;
+}
+
+.bg-primary-fade {
+  background-color: #4242ff21 !important;
+}
+
+table a {
+  color: #0000fe;
 }

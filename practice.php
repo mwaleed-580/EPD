@@ -26,69 +26,91 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
 <div class="main-wrapper q">
     <h1 class="my-4"><?php echo $title; ?></h1>
-    <p> <strong>Total Overall Items:</strong> <span id="total-items"><?php echo number_format($total_items, 0, '.', ','); ?></span> </p>
-    <p> <strong>Total Overall Cost:</strong> <span id="total-items">£<?php echo number_format($total_cost, 2, '.', ','); ?></span> </p>
-
-    <div id="filter-rows" class="mt-3">
-        <div class="row g-3 filter-row my-1">
-            <div class="col-md-4">
-                <select class="form-control" id="order-by">
-                    <option disabled selected value="null">Order By</option>
-                    <option value="TOTAL_ITEMS">Total Items</option>
-                    <option value="TOTAL_COST">Total Cost</option>
-                    <option value="BNF_DESCRIPTION">BNF Description</option>
-                </select>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="p-2 border border-primary rounded-circle me-3">
+                                <div class="icon-box md bg-primary-fade rounded-5">
+                                    <i class="ri-luggage-cart-fill fs-4 color-primary"></i>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column">
+                                <h4>Total Overall Items: </h4>
+                                <p class="m-0"><?php echo number_format($total_items, 0, '.', ','); ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-2">
-                <select class="form-control" id="order">
-                    <option disabled selected value="null">Order</option>
-                    <option value="asc">Ascending</option>
-                    <option value="desc">Descending</option>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <button type="button" class="btn btn-success" id="sort" disabled>Sort Results</button>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="p-2 border border-primary rounded-circle me-3">
+                                <div class="icon-box md bg-primary-fade rounded-5">
+                                    <i class="ri-money-dollar-circle-line fs-4 color-primary"></i>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-column">
+                                <h4>Total Overall Cost: </h4>
+                                <p class="m-0">£<?php echo number_format($total_cost, 2, '.', ','); ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <h2 class="my-4 py-4">All Items Sold By <?php echo $title; ?></h2>
 
-    <table class="table my-4" id="practiceDataTable">
-        <thead>
-            <tr>
-                <th scope="col" class="width-100">Sr no.</th>
-                <th scope="col">BNF Description</th>
-                <th scope="col" class="width-150">Total Items</th>
-                <th scope="col" class="width-150">Total Cost</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+    <div class="card">
+        <div class="card-body">
+            <table class="table align-middle table-hover" id="practiceDataTable">
+                <thead>
+                    <tr>
+                        <th scope="col" class="width-100">Sr no.</th>
+                        <th scope="col" class="tablesorter-header" data-cols="BNF_DESCRIPTION">BNF Description</th>
+                        <th scope="col" class="width-150 tablesorter-header" data-cols="TOTAL_ITEMS">Total Items</th>
+                        <th scope="col" class="width-150 tablesorter-header" data-cols="TOTAL_COST">Total Cost</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
 
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center" id="pagination">
-        </ul>
-    </nav>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center" id="pagination">
+                </ul>
+            </nav>
+
+        </div>
+    </div>
 
     <h2 class="my-4 py-4">All Dispensars Assocatied With <?php echo $title; ?></h2>
 
-    <table class="table my-4" id="dispensarDataTable">
-        <thead>
-            <tr>
-                <th scope="col" class="width-100">Sr no.</th>
-                <th scope="col">Dispensar Name</th>
-                <th scope="col" class="width-150">Total Items</th>
-                <th scope="col" class="width-150">Total EPS Items</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+    <div class="card">
+        <div class="card-body">
+            <table class="table align-middle table-hover" id="dispensarDataTable">
+                <thead>
+                    <tr>
+                        <th scope="col" class="width-100">Sr no.</th>
+                        <th scope="col" class="tablesorter-header" data-cols="DispenserName">Dispensar Name</th>
+                        <th scope="col" class="width-150 tablesorter-header" data-cols="TOTAL_ITEMS">Total Items</th>
+                        <th scope="col" class="width-150 tablesorter-header" data-cols="TOTAL_EPS_ITEMS">Total EPS Items</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
 
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center" id="pagination">
-        </ul>
-    </nav>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center" id="pagination">
+                </ul>
+            </nav>
+        </div>
+    </div>
 
 </div>
 
@@ -104,9 +126,16 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 <script src="assets/js/practice_name/get-practice-data.js"></script>
 <script src="assets/js/practice_name/practice-data-pagination.js"></script>
 <script>
-    currentPage = 1;
-    orderByValue = "null";
-    orderValue = "null";
+    practiceOrder = {
+        currentPage: 1,
+        orderByValue: "null",
+        orderValue: "null"
+    };
+    dispensarOrder = {
+        currentPage: 1,
+        orderByValue: "null",
+        orderValue: "null"
+    };
 </script>
 <script src="assets/js/practice_name/get-dispensar-data.js"></script>
 <!-- <script src="assets/js/practice_name/dispensar-data-pagination.js"></script> -->

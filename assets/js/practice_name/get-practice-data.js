@@ -1,4 +1,4 @@
-function getResults(page, orderBy = null, order = null) {
+function getPracticeResults(page, orderBy = null, order = null) {
   var xhr = new XMLHttpRequest();
   xhr.open("POST", "includes/practice_name/get_practice_data.php", true);
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -9,7 +9,7 @@ function getResults(page, orderBy = null, order = null) {
         .getElementById("practiceDataTable")
         .getElementsByTagName("tbody")[0];
       tableBody.innerHTML = "";
-      currentPage = page;
+      practiceOrder.currentPage = page;
 
       if (create_pagination) {
         createPagination();
@@ -22,9 +22,9 @@ function getResults(page, orderBy = null, order = null) {
         cell.colSpan = 3;
         cell.textContent = "No results found";
       } else {
-        let srNo = currentPage;
-        if (currentPage > 1) {
-          srNo = (currentPage - 1) * 100 + 1;
+        let srNo = practiceOrder.currentPage;
+        if (practiceOrder.currentPage > 1) {
+          srNo = (practiceOrder.currentPage - 1) * 100 + 1;
         }
 
         response.result_obj.forEach(function (item) {
@@ -67,4 +67,4 @@ function getResults(page, orderBy = null, order = null) {
   );
 }
 
-document.addEventListener("DOMContentLoaded", getResults(1));
+document.addEventListener("DOMContentLoaded", getPracticeResults(1));

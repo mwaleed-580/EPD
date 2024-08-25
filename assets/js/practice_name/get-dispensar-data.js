@@ -1,16 +1,15 @@
-function getResults(page, orderBy = null, order = null) {
+function getDispensarResults(page, orderBy = null, order = null) {
   var xhr = new XMLHttpRequest();
   xhr.open("POST", "includes/practice_name/get_dispensar_data.php", true);
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xhr.onload = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
-      console.log(xhr.responseText);
       var response = JSON.parse(xhr.responseText);
       var tableBody = document
         .getElementById("dispensarDataTable")
         .getElementsByTagName("tbody")[0];
       tableBody.innerHTML = "";
-      currentPage = page;
+      dispensarOrder.currentPage = page;
 
       if (create_pagination) {
         createPagination();
@@ -23,9 +22,9 @@ function getResults(page, orderBy = null, order = null) {
         cell.colSpan = 3;
         cell.textContent = "No results found";
       } else {
-        let srNo = currentPage;
-        if (currentPage > 1) {
-          srNo = (currentPage - 1) * 100 + 1;
+        let srNo = dispensarOrder.currentPage;
+        if (dispensarOrder.currentPage > 1) {
+          srNo = (dispensarOrder.currentPage - 1) * 100 + 1;
         }
 
         response.result_obj.forEach(function (item) {
@@ -61,4 +60,4 @@ function getResults(page, orderBy = null, order = null) {
   );
 }
 
-document.addEventListener("DOMContentLoaded", getResults(1));
+document.addEventListener("DOMContentLoaded", getDispensarResults(1));

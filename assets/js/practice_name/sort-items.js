@@ -1,33 +1,44 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const orderBy = document.getElementById("order-by");
-  const order = document.getElementById("order");
-  const sortBtn = document.getElementById("sort");
+function sortItems(tableHeader, dataType, functionName) {
+  const tableHeaderCols = document.querySelectorAll(tableHeader);
+  tableHeaderCols.forEach((item) => {
+    item.addEventListener("click", () => {
+      tableHeaderCols.forEach((innerItem) => {
+        if (innerItem !== item) {
+          innerItem.classList.remove("headerAsc");
+          innerItem.classList.remove("headerDesc");
+        }
+      });
 
-  orderByValue = orderBy.value;
-  orderValue = order.value;
+      let orderBy = item.getAttribute("data-cols");
+      let order = "asc";
 
-  orderBy.addEventListener("change", () => {
-    orderByValue = orderBy.value;
+      if (item.classList.contains("headerAsc")) {
+        item.classList.add("headerDesc");
+        item.classList.remove("headerAsc");
+        order = "desc";
+      } else if (item.classList.contains("headerDesc")) {
+        item.classList.remove("headerDesc");
+        order = "null";
+        orderBy = "null";
+      } else {
+        item.classList.add("headerAsc");
+      }
 
-    if (orderByValue !== "null" && orderValue !== "null") {
-      sortBtn.disabled = false;
-    } else {
-      sortBtn.disabled = true;
-    }
+      dataType.orderByValue = orderBy;
+      dataType.orderValue = order;
+
+      functionName(1, orderBy, order);
+    });
   });
+}
 
-  order.addEventListener("change", () => {
-    orderValue = order.value;
-    if (orderByValue !== "null" && orderValue !== "null") {
-      sortBtn.disabled = false;
-    } else {
-      sortBtn.disabled = true;
-    }
-  });
-
-  sortBtn.addEventListener("click", () => {
-    orderByValue = orderBy.value;
-    orderValue = order.value;
-    getResults(1, orderByValue, orderValue);
-  });
-});
+sortItems(
+  "#practiceDataTable .tablesorter-header",
+  practiceOrder,
+  getPracticeResults
+);
+sortItems(
+  "#dispensarDataTable .tablesorter-header",
+  dispensarOrder,
+  getDispensarResults
+);

@@ -7,9 +7,9 @@ function createPageItem(
   const li = document.createElement("li");
   li.className =
     "page-item" + (isActive ? " active" : "") + (isDisabled ? " disabled" : "");
-  li.innerHTML = `<a class="page-link" href="#" onclick="getResults(${page},'${orderByValue}','${orderValue}')">${
-    text || page
-  }</a>`;
+  li.innerHTML = `<a class="page-link" href="#" onclick="getPracticeResults(${page},'${
+    practiceOrder.orderByValue
+  }','${practiceOrder.orderValue}')">${text || page}</a>`;
   return li;
 }
 
@@ -18,31 +18,36 @@ function createPagination() {
 
   pagination.innerHTML = "";
 
-  if (currentPage > 1) {
-    const prevLi = createPageItem(currentPage - 1, false, false, "Previous");
+  if (practiceOrder.currentPage > 1) {
+    const prevLi = createPageItem(
+      practiceOrder.currentPage - 1,
+      false,
+      false,
+      "Previous"
+    );
     pagination.appendChild(prevLi);
   }
 
-  if (currentPage > 3) {
+  if (practiceOrder.currentPage > 3) {
     const firstLi = createPageItem(1);
     pagination.appendChild(firstLi);
-    if (currentPage > 4) {
+    if (practiceOrder.currentPage > 4) {
       const ellipsisLi = createPageItem(null, false, true, "...");
       pagination.appendChild(ellipsisLi);
     }
   }
 
   for (
-    let i = Math.max(1, currentPage - 2);
-    i <= Math.min(totalPages, currentPage + 2);
+    let i = Math.max(1, practiceOrder.currentPage - 2);
+    i <= Math.min(totalPages, practiceOrder.currentPage + 2);
     i++
   ) {
-    const li = createPageItem(i, i === currentPage);
+    const li = createPageItem(i, i === practiceOrder.currentPage);
     pagination.appendChild(li);
   }
 
-  if (currentPage < totalPages - 2) {
-    if (currentPage < totalPages - 3) {
+  if (practiceOrder.currentPage < totalPages - 2) {
+    if (practiceOrder.currentPage < totalPages - 3) {
       const ellipsisLi = createPageItem(null, false, true, "...");
       pagination.appendChild(ellipsisLi);
     }
@@ -50,8 +55,13 @@ function createPagination() {
     pagination.appendChild(lastLi);
   }
 
-  if (currentPage < totalPages) {
-    const nextLi = createPageItem(currentPage + 1, false, false, "Next");
+  if (practiceOrder.currentPage < totalPages) {
+    const nextLi = createPageItem(
+      practiceOrder.currentPage + 1,
+      false,
+      false,
+      "Next"
+    );
     pagination.appendChild(nextLi);
   }
 }
